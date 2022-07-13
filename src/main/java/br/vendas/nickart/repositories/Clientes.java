@@ -20,4 +20,8 @@ public interface Clientes extends JpaRepository<Cliente, Integer>{
 
 	List<Cliente> findByNome(String nome);
 	
+	List<Cliente> findByNomeOrId(String nome, Integer id);
+	
+	boolean existsByNome(String nome);
+	
 }

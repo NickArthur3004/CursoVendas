@@ -1,12 +1,14 @@
 package br.vendas.nickart.entities;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,9 @@ public class Produto {
 	
 	@Column(name="preco_unitario")
 	private BigDecimal preco;
+	
+	@OneToMany(mappedBy = "produto")
+	private Set<ItemPedido> itemPedidos;
 	
 	
 	public Integer getId() {
@@ -39,6 +44,12 @@ public class Produto {
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	public Set<ItemPedido> getItemPedidos() {
+		return itemPedidos;
+	}
+	public void setItemPedidos(Set<ItemPedido> itemPedidos) {
+		this.itemPedidos = itemPedidos;
 	}
 	
 	

@@ -29,9 +29,8 @@ public class Pedido {
 	@Column(name="data_pedido")
 	private LocalDate dataPedido;
 	
-	//1000.00
-	@Column(length = 20, precision = 2)
-	private BigDecimal total;
+	@Column(name = "total", precision = 20, scale = 2)
+    private BigDecimal total;
 	
 	@OneToMany(mappedBy = "pedido")
 	private Set<ItemPedido> itemPedido;
@@ -65,6 +64,10 @@ public class Pedido {
 	}
 	public void setItemPedido(Set<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
+	}
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", dataPedido=" + dataPedido + ", total=" + total + "]";
 	}
 	
 	

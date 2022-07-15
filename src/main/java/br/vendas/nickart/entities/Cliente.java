@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Cliente {
 	private String nome;
 	
 	
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
 	private Set<Pedido> pedidos;
 	
 	
@@ -52,11 +53,17 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + "]";
 	}
-	
-	
 
 }

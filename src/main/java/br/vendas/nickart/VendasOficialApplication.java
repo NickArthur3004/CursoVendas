@@ -17,36 +17,6 @@ import br.vendas.nickart.repositories.Pedidos;
 
 @SpringBootApplication
 public class VendasOficialApplication {
-
-	@Bean
-	public CommandLineRunner init(@Autowired Clientes clientes,
-								  @Autowired Pedidos pedidos) {
-		return args -> {
-
-			System.out.println("Salvando Clientes");
-			
-			Cliente cliente1 = new Cliente("Nicolas");
-			clientes.save(cliente1);
-
-			Cliente cliente2 = new Cliente("Alanis");
-			clientes.save(cliente2);
-			
-			Pedido p = new Pedido();
-			p.setCliente(cliente2);
-			p.setDataPedido(LocalDate.now());
-			p.setTotal(BigDecimal.valueOf(100));
-			
-			pedidos.save(p);
-
-//			Cliente cliente = clientes.findClienteFetchPedidos(cliente2.getId());
-//			System.out.println(cliente);
-//			
-//			System.out.println(cliente.getPedidos());
-
-			pedidos.findByCliente(cliente2).forEach(System.out::println);
-		};
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(VendasOficialApplication.class, args);
 	}

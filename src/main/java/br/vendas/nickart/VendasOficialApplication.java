@@ -18,14 +18,6 @@ import br.vendas.nickart.repositories.Pedidos;
 @SpringBootApplication
 public class VendasOficialApplication {
 	
-	@Bean
-	public CommandLineRunner commandLineRunner(@Autowired Clientes clientes) {
-		return args ->{
-			Cliente c = new Cliente(null, "Nicolas");
-			clientes.save(c);
-		};
-	}
-	
 	public static void main(String[] args) {
 		SpringApplication.run(VendasOficialApplication.class, args);
 	}

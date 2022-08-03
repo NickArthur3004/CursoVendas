@@ -2,6 +2,7 @@ package br.vendas.nickart.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,8 +15,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pedido {
 	
 	@Id
@@ -33,44 +41,5 @@ public class Pedido {
     private BigDecimal total;
 	
 	@OneToMany(mappedBy = "pedido")
-	private Set<ItemPedido> itemPedido;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	public LocalDate getDataPedido() {
-		return dataPedido;
-	}
-	public void setDataPedido(LocalDate dataPedido) {
-		this.dataPedido = dataPedido;
-	}
-	public BigDecimal getTotal() {
-		return total;
-	}
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-	public Set<ItemPedido> getItemPedido() {
-		return itemPedido;
-	}
-	public void setItemPedido(Set<ItemPedido> itemPedido) {
-		this.itemPedido = itemPedido;
-	}
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", dataPedido=" + dataPedido + ", total=" + total + "]";
-	}
-	
-	
-	
-
+	private List<ItemPedido> itemPedido;	
 }

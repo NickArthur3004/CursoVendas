@@ -46,31 +46,33 @@ public class ClienteController {
 	public Cliente save(@RequestBody Cliente cliente) {
 		return clientes.save(cliente);
 	}
-	@DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete( @PathVariable Integer id ){
-        clientes.findById(id)
-                .map( cliente -> {
-                    clientes.delete(cliente );
-                    return cliente;
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Cliente não encontrado") );
-
-    }
 	
-	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable("id") Integer id,
-								@RequestBody Cliente cliente) {
-		
-		 clientes.findById(id)
-				.map(clienteExistente -> { 
-					cliente.setId(clienteExistente.getId());
-					clientes.save(cliente);
-					return clienteExistente;
-				}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado"));
-	}
+	 @DeleteMapping("{id}")
+	    @ResponseStatus(HttpStatus.NO_CONTENT)
+	    public void delete( @PathVariable Integer id ){
+	        clientes.findById(id)
+	                .map( cliente -> {
+	                    clientes.delete(cliente );
+	                    return cliente;
+	                })
+	                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+	                        "Cliente não encontrado") );
+
+	    }
+	
+	 @PutMapping("{id}")
+	    @ResponseStatus(HttpStatus.NO_CONTENT)
+	    public void update( @PathVariable Integer id,
+	                        @RequestBody Cliente cliente ){
+	        clientes
+	                .findById(id)
+	                .map( clienteExistente -> {
+	                   cliente.setId(clienteExistente.getId());
+	                    clientes.save(cliente);
+	                    return clienteExistente;
+	                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+	                    "Cliente não encontrado") );
+	    }
 	
 	@GetMapping
 	public List<Cliente> find (Cliente filtro) {

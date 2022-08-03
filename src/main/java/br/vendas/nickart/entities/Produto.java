@@ -11,8 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Produto {
 	
 	@Id
@@ -24,34 +33,6 @@ public class Produto {
 	private BigDecimal preco;
 	
 	@OneToMany(mappedBy = "produto")
+	@JsonIgnore
 	private Set<ItemPedido> itemPedidos;
-	
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public BigDecimal getPreco() {
-		return preco;
-	}
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
-	public Set<ItemPedido> getItemPedidos() {
-		return itemPedidos;
-	}
-	public void setItemPedidos(Set<ItemPedido> itemPedidos) {
-		this.itemPedidos = itemPedidos;
-	}
-	
-	
-
 }

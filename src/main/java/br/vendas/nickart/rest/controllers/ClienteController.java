@@ -1,4 +1,4 @@
-package br.vendas.nickart.controllers;
+package br.vendas.nickart.rest.controllers;
 
 import java.util.List;
 import java.util.Optional;

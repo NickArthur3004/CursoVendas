@@ -14,6 +14,8 @@ import br.vendas.nickart.entities.Cliente;
 import br.vendas.nickart.entities.ItemPedido;
 import br.vendas.nickart.entities.Pedido;
 import br.vendas.nickart.entities.Produto;
+import br.vendas.nickart.enums.StatusPedido;
+import br.vendas.nickart.exception.PedidoNaoEncontradoException;
 import br.vendas.nickart.exception.RegraNegocioException;
 import br.vendas.nickart.repositories.Clientes;
 import br.vendas.nickart.repositories.ItemsPedido;
@@ -49,6 +51,7 @@ public class PedidoServiceImpl implements PedidoService{
 		pedido.setDataPedido(LocalDate.now());
 		pedido.setCliente(cliente);
 		pedido.setItemPedido(null);
+		pedido.setStatus(StatusPedido.REALIZADO);
 		
 		List<ItemPedido> itemsPedidos = ConverterItems(pedido, dto.getItems());
 		repository.save(pedido);
@@ -85,6 +88,19 @@ public class PedidoServiceImpl implements PedidoService{
 	public Optional<Pedido> obterPedidoCompleto(Integer id) {
 		
 		return repository.findByIdFetchItens(id);
+	}
+
+	@Override
+	@Transactional
+	public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+		
+		repository.findById(id)
+				  .map(pedido -> {
+					  pedido.setStatus(statusPedido);
+					  return repository.save(pedido);
+				  }).orElseThrow(() -> new PedidoNaoEncontradoException() );
+		
+		
 	}
 	
 	

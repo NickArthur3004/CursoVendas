@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -31,9 +33,12 @@ public class Cliente {
 	private Integer id;
 	
 	@Column(length = 100)
+	@NotEmpty(message = "Campo nome é Obrigatório.")
 	private String nome;
 	
 	@Column(length = 11)
+	@NotEmpty(message = "Campo CPF é Obrigatório.")
+	@CPF(message = "Informe um CPF valido")
 	private String cpf;
 	
 	@JsonIgnore

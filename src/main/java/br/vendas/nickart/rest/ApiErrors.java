@@ -8,8 +8,15 @@ public class ApiErrors {
 	
 	@Getter
 	private List<String> errors;
+	
+	
 
 	public ApiErrors(String mensagemErro) {
 		this.errors = Arrays.asList(mensagemErro);
+	}
+	
+	public ApiErrors(List<String> errors) {
+		super();
+		this.errors = errors;
 	}
 }

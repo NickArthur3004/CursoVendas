@@ -2,6 +2,8 @@ package br.vendas.nickart.rest.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -37,7 +39,7 @@ public class ProdutosController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Produto save(@RequestBody Produto produto) {
+	public Produto save(@RequestBody @Valid Produto produto) {
 		return produtos.save(produto);
 	}
 	
@@ -57,7 +59,7 @@ public class ProdutosController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@PathVariable("id") Integer id,
-								@RequestBody Produto produto) {
+								@RequestBody @Valid Produto produto) {
 		
 		produtos.findById(id)
 				.map(produtoExistente -> { 
